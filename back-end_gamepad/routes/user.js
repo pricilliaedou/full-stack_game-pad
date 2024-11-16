@@ -10,24 +10,43 @@ router.post("/user/signup", async (req, res) => {
   try {
     // console.log(req.body);
     const { email, username, password } = req.body;
-    const token = uid2(64);
-    const salt = uid2(16);
-    const hash = SHA256(password + salt).toString(encBase64);
-    // console.log(hash);
 
-    const newUser = new User({
-      email: email,
-      account: { username: username },
-      token: token,
-      salt: salt,
-      hash: hash,
-    });
-    await newUser.save();
-    res.json({
-      _id: newUser._id,
-      account: newUser.account,
-      token: newUser.token,
-    });
+    if (!username) {
+      res.status(400).send("Veuillez saisir un username 😥");
+    } else {
+      const usernameExist = await User.findOne({
+        "account.username": username,
+      });
+      if (usernameExist === null) {
+        const emailExist = await User.findOne({ email: email });
+        if (emailExist === null) {
+          const token = uid2(64);
+          const salt = uid2(16);
+          const hash = SHA256(password + salt).toString(encBase64);
+          // console.log(hash);
+
+          const newUser = new User({
+            email: email,
+            account: { username: username },
+            token: token,
+            salt: salt,
+            hash: hash,
+          });
+          await newUser.save();
+          res.json({
+            _id: newUser._id,
+            account: newUser.account,
+            token: newUser.token,
+          });
+        } else {
+          res.status(409).json({ error: "email déjà utilisé" });
+        }
+      } else {
+        res
+          .status(409)
+          .send("Cet username est déjà utilisé, veuillez en choisir un autre");
+      }
+    }
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
