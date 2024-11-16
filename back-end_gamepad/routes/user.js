@@ -12,7 +12,7 @@ router.post("/user/signup", async (req, res) => {
     const { email, username, password } = req.body;
 
     if (!username) {
-      res.status(400).send("Veuillez saisir un username 😥");
+      res.status(400).json({ error: "Veuillez saisir un username 😥" });
     } else {
       const usernameExist = await User.findOne({
         "account.username": username,
@@ -42,10 +42,40 @@ router.post("/user/signup", async (req, res) => {
           res.status(409).json({ error: "email déjà utilisé" });
         }
       } else {
-        res
-          .status(409)
-          .send("Cet username est déjà utilisé, veuillez en choisir un autre");
+        res.status(409).json({
+          error: "Cet username est déjà utilisé, veuillez en choisir un autre",
+        });
       }
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.post("/user/login", async (req, res) => {
+  try {
+    // console.log(req.body);
+    const userExist = await User.findOne({ email: req.body.email });
+    if (userExist) {
+      const newHash = SHA256(req.body.password + userExist.salt).toString(
+        encBase64
+      );
+      if (newHash === userExist.hash) {
+        // res.status(200).send("connexion réussie");
+        res
+          .status(200)
+          .json({ _id: userExist._id, account: userExist.account });
+      } else {
+        res.status(401).json({
+          error:
+            "Email ou mot de passe incorrect. Si vous n'avez pas de compte, merci de vous inscrire. ",
+        });
+      }
+    } else {
+      res.status(401).json({
+        error:
+          "Email ou mot de passe incorrect. Si vous n'avez pas de compte, merci de vous inscrire ",
+      });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
