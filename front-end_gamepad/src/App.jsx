@@ -1,10 +1,15 @@
+import Accueil from "./pages/Accueil";
+import Header from "./composants/Header";
+
 import "./App.css";
 
 function App() {
   return (
-    <>
-      <h1>Test</h1>
-    </>
+    <div className='container mx-auto max-w-[1280px] bg-[#1f2023] text-white '>
+      <Header />
+
+      <Accueil />
+    </div>
   );
 }
 
