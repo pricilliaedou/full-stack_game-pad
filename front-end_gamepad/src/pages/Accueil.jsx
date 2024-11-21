@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import Search from "../composants/Search";
 
 const Accueil = () => {
   const [currentPageData, setCurrentPageData] = useState([]);
@@ -19,8 +20,6 @@ const Accueil = () => {
     }`;
     try {
       const response = await axios.get(url);
-
-      // Met à jour les résultats et la pagination
       setCurrentPageData(response.data.results);
       setTotalResults(response.data.count);
       setIsLoading(false);
@@ -28,22 +27,6 @@ const Accueil = () => {
       console.error("Erreur lors de la récupération des données :", error);
       setIsLoading(false);
     }
-  };
-
-  const handleSearchChange = (event) => {
-    const value = event.target.value;
-    setSearch(value);
-    setActivePage(1); // Réinitialise à la première page lors d'une nouvelle recherche
-
-    // Clear le timeout précédent
-    if (timeoutId) clearTimeout(timeoutId);
-
-    // Met un timeout pour retarder l'appel API
-    const newTimeoutId = setTimeout(() => {
-      fetchPageData(1, value); // Recherche avec le texte saisi
-    }, 500);
-
-    setTimeoutId(newTimeoutId); // Stocke l'identifiant du timeout
   };
 
   useEffect(() => {
@@ -102,24 +85,15 @@ const Accueil = () => {
           <h1 className='text-4xl'>Gamepad</h1>
         </div>
       </div>
-      <div className='pt-2 mx-auto text-gray-600 mb-6'>
-        <input
-          type='search'
-          value={search}
-          onChange={handleSearchChange}
-          className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none'
-          placeholder='Rechercher un jeu...'
-          required
-        />
-        {search && (
-          <div className='text-center mt-2'>
-            <p>
-              Résultats pour "<strong>{search}</strong>" :{" "}
-              <strong>{totalResults}</strong> jeux trouvés
-            </p>
-          </div>
-        )}
-      </div>
+      <Search
+        search={search}
+        setSearch={setSearch}
+        timeoutId={timeoutId}
+        setTimeoutId={setTimeoutId}
+        setActivePage={setActivePage}
+        dataPages={fetchPageData}
+        totalResults={totalResults}
+      />
 
       <div className='flex flex-wrap gap-4 justify-center'>
         {isLoading ? (
