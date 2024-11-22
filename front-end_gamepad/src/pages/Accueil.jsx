@@ -115,7 +115,8 @@ const Accueil = () => {
           ))
         ) : (
           <p className='text-center text-gray-500 mt-4'>
-            Désolé, nous n'avons aucun jeu à ce nom.
+            Désolé, nous n'avons aucun jeu au nom de <strong>"{search}"</strong>
+            .
           </p>
         )}
       </div>

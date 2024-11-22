@@ -10,7 +10,7 @@ const Search = ({
   totalResults,
 }) => {
   const handleSearchChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.toLowerCase();
     setSearch(value);
     setActivePage(1);
 

@@ -1,10 +1,10 @@
 const InputSearch = ({ totalResults, search, funcSearch }) => {
   return (
-    <form className='pt-2 mx-auto text-gray-600 mb-6 '>
-      <div className='relative'>
-        <div className='absolute inset-y-0 end-4 flex items-center ps-3 pointer-events-none'>
+    <form className='pt-2 mx-auto text-gray-600 mb-6'>
+      <div className='relative max-w-[250px] flex flex-col'>
+        <div className='absolute h-10 left-3 w-[20px] inset-y-0 flex items-center justify-center pointer-events-none'>
           <svg
-            className='w-5 h-5 text-gray-500 dark:text-gray-400 '
+            className='w-5 h-5 text-gray-500 '
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
             viewBox='0 0 24 24'
@@ -14,19 +14,21 @@ const InputSearch = ({ totalResults, search, funcSearch }) => {
             <path
               strokeLinecap='round'
               strokeLinejoin='round'
-              d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'
+              d='M21 21l-5.197-5.197m0 0a7.5 7.5 0 1 0-10.607-10.607 7.5 7.5 0 0 0 10.607 10.607z'
             />
           </svg>
         </div>
+
         <input
           type='search'
           value={search}
           onChange={funcSearch}
           id='default-search'
-          className=' border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none dark:placeholder-gray-400 '
+          className='w-full border border-gray-300 bg-white h-10 pl-10 pr-3 rounded-lg text-sm focus:outline-none'
           placeholder='Rechercher un jeu...'
           required
         />
+
         {search && (
           <div className='text-center mt-2'>
             <p>
