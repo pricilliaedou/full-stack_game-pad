@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
+console.log(process.env);
 
 const app = express();
 app.use(express.json());
@@ -7,9 +9,7 @@ app.use(express.json());
 const cors = require("cors");
 app.use(cors());
 
-const port = 3000;
-
-mongoose.connect("mongodb://localhost/game_pad");
+mongoose.connect(process.env.MONGODB_URI);
 
 const userRoutes = require("./routes/user");
 app.use(userRoutes);
@@ -22,6 +22,6 @@ app.all("*", function (req, res) {
   res.status(404).send("Page introuvable 😞");
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log("Serveur en marche 🔥🔥🔥");
 });

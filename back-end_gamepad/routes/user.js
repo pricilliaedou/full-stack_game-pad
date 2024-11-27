@@ -61,10 +61,11 @@ router.post("/user/login", async (req, res) => {
         encBase64
       );
       if (newHash === userExist.hash) {
-        // res.status(200).send("connexion réussie");
-        res
-          .status(200)
-          .json({ _id: userExist._id, account: userExist.account });
+        res.status(200).json({
+          _id: userExist._id,
+          account: userExist.account,
+          token: userExist.token,
+        });
       } else {
         res.status(401).json({
           error:
