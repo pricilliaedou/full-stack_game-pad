@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Logo from "../assets/logo.png";
 
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState("");
@@ -15,52 +14,67 @@ const Login = ({ setUser }) => {
     try {
       event.preventDefault();
       setIsLoading(true);
-      const response = await axios.post("/user/login", {
-        email: email,
-        password: password,
-      });
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/user/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
       if (response.data.token) {
         setUser(response.data.token);
         setIsLoading(false);
-        navigate("/contact");
+        navigate("/");
       } else {
-        alert("Une erreur est survenue, veuillez réssayer.");
+        alert("An error has occured, please try again..");
       }
     } catch (error) {
-      if (error.response.status === 201 || error.response.status === 400) {
-        setErrorMessage("Email ou mot de passe invalide");
+      if (error.response.status === 401 || error.response.status === 400) {
+        setErrorMessage("Invalid email or password");
         setIsLoading(false);
       }
       console.log(error.message);
     }
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='my-10'>
+      <h2 className='mb-3'>Login</h2>
+      <form className='flex flex-col gap-3 ' onSubmit={handleSubmit}>
         <input
-          type='email'
+          className='p-2 rounded text-gray-400'
           onChange={(event) => {
             setEmail(event.target.value);
             setErrorMessage("");
           }}
-          placeholder='Adresse email'
+          type='email'
+          placeholder='Email'
         />
         <input
-          type='password'
+          className='p-2 rounded text-gray-400'
           onChange={(event) => {
             setPassword(event.target.value);
           }}
-          placeholder='Mot de passe'
+          type='password'
+          placeholder='Password'
         />
-        <span>{errorMessage}</span>
+        <span className='text-[#ff4655] text-sm'>{errorMessage}</span>
         {isLoading ? (
           <p>Page en cours de téléchargement...</p>
         ) : (
-          <button disabled={isLoading ? true : false} type='submit'>
-            Se connecter
+          <button
+            className='bg-[#ff4655] rounded p-1'
+            disabled={isLoading ? true : false}
+            type='submit'
+          >
+            Connexion
           </button>
         )}
       </form>
+
+      <Link to='/signup' className='block text-sm italic text-center'>
+        Don't have a account yet?
+      </Link>
     </div>
   );
 };

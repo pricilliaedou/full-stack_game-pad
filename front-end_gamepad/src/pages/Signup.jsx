@@ -13,14 +13,17 @@ const Signup = ({ setUser }) => {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      const response = await axios.post("http://localhost:3000/user/signup", {
-        email: email,
-        username: username,
-        password: password,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/user/signup`,
+        {
+          email: email,
+          username: username,
+          password: password,
+        }
+      );
       if (response.data.token) {
         setUser(response.data.token);
-
+        alert("successfully created account");
         navigate("/");
       } else {
         alert("An error has occured, please try again.");
