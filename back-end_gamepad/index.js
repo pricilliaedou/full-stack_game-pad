@@ -15,13 +15,13 @@ const userRoutes = require("./routes/user");
 app.use(userRoutes);
 
 app.get("/", (req, res) => {
-  res.json({ message: "Test" });
+  res.json({ message: "Je suis le test de la page d'accueil de Gamepad" });
 });
 
 app.all("*", function (req, res) {
-  res.status(404).send("Page introuvable 😞");
+  res.status(404).send("Page not found 😞");
 });
 
 app.listen(process.env.PORT, () => {
-  console.log("Serveur en marche 🔥🔥🔥");
+  console.log("Server started 🔥🔥🔥");
 });

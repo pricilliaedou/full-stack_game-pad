@@ -12,7 +12,7 @@ router.post("/user/signup", async (req, res) => {
     const { email, username, password } = req.body;
 
     if (!username) {
-      res.status(400).json({ error: "Veuillez saisir un username 😥" });
+      res.status(400).json({ error: "Please enter a username 😥" });
     } else {
       const usernameExist = await User.findOne({
         "account.username": username,
@@ -39,11 +39,11 @@ router.post("/user/signup", async (req, res) => {
             token: newUser.token,
           });
         } else {
-          res.status(409).json({ error: "email déjà utilisé" });
+          res.status(409).json({ error: "Email already used" });
         }
       } else {
         res.status(409).json({
-          error: "Cet username est déjà utilisé, veuillez en choisir un autre",
+          error: "This username is already in use, please choose another one",
         });
       }
     }
@@ -69,13 +69,13 @@ router.post("/user/login", async (req, res) => {
       } else {
         res.status(401).json({
           error:
-            "Email ou mot de passe incorrect. Si vous n'avez pas de compte, merci de vous inscrire. ",
+            "Incorrect email or password. If you don't have an account, please register. ",
         });
       }
     } else {
       res.status(401).json({
         error:
-          "Email ou mot de passe incorrect. Si vous n'avez pas de compte, merci de vous inscrire ",
+          "Incorrect email or password. If you don't have an account, please register ",
       });
     }
   } catch (error) {
