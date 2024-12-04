@@ -1,4 +1,4 @@
 [build]
-  base = "front-end_gamepad"
+  base = "Full-stack_Game-Pad/front-end_gamepad"
   publish = "dist"
   command = "npm run build"
