@@ -1,0 +1,4 @@
+[build]
+  base = "front-end_gamepad"
+  publish = "front-end_gamepad/dist"
+  command = "npm run build"
