@@ -11,19 +11,28 @@ import Header from "./composants/Header";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token") || null);
-  const setUser = (token) => {
-    if (token) {
+  const [username, setUsername] = useState(Cookies.get("username") || null);
+
+  const setUser = (data) => {
+    if (data) {
+      const { token, username } = data;
       setToken(token);
+      setUsername(username);
       Cookies.set("token", token, { expires: 14 });
+      Cookies.set("username", username, { expires: 14 });
+      console.log(token.username);
     } else {
       setToken(null);
+      setUsername(null);
+
       Cookies.remove("token");
+      Cookies.remove("username");
     }
   };
   return (
     <Router>
       <div className='container mx-auto max-w-[1280px] bg-[#1f2023] text-white min-h-[100vh]'>
-        <Header setUser={setUser} token={token} />
+        <Header setUser={setUser} token={token} username={username} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/:id' element={<Game />} />

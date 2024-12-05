@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import Logo from "../assets/logo.png";
 
-const Header = ({ token, setUser }) => {
+const Header = ({ token, username, setUser }) => {
   const navigate = useNavigate();
 
   return (
@@ -24,9 +24,10 @@ const Header = ({ token, setUser }) => {
         </div>
       ) : (
         <div className='flex justify-center items-center'>
-          <button className='flex  justify-center items-center py-1 px-2 rounded pointer'>
+          <button className='flex justify-center items-center py-1 px-2 rounded pointer'>
             <p>My collection</p>
           </button>
+          <p className='mr-2 text-[#ff4655]'>Welcome, {username}</p>
 
           <button
             onClick={() => setUser(null)}

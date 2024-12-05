@@ -23,7 +23,11 @@ const Login = ({ setUser }) => {
         }
       );
       if (response.data.token) {
-        setUser(response.data.token);
+        // console.log(response.data);
+        setUser({
+          token: response.data.token,
+          username: response.data.account.username,
+        });
         setIsLoading(false);
         navigate("/");
       } else {
