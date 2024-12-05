@@ -101,7 +101,7 @@ const Home = () => {
           <p>Chargement...</p>
         ) : currentPageData.length > 0 ? (
           currentPageData.map((game) => (
-            <div key={game.id}>
+            <Link to={`/${game.slug}`} key={game.id}>
               <div className='relative w-64 h-80'>
                 <img
                   src={game.background_image}
@@ -112,7 +112,7 @@ const Home = () => {
                   <p>{game.name}</p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))
         ) : (
           <p className='text-center text-gray-500 mt-4'>

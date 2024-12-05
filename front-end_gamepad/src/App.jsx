@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Pattern from "./composants/Pattern";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Game from "./pages/Game";
 import Header from "./composants/Header";
 
 function App() {
@@ -21,10 +22,12 @@ function App() {
   };
   return (
     <Router>
-      <div className='container mx-auto max-w-[1280px] bg-[#1f2023] text-white '>
+      <div className='container mx-auto max-w-[1280px] bg-[#1f2023] text-white min-h-[100vh]'>
         <Header setUser={setUser} token={token} />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/:id' element={<Game />} />
+
           <Route
             path='/login'
             element={

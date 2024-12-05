@@ -2,8 +2,8 @@ import Logo from "../assets/logo.png";
 
 const Pattern = ({ children }) => (
   <>
-    <div className='flex w-3/5 m-auto py-2  '>
-      <div className='border-r-2 border-[#ff4655] w-1/2 bg-gradient-to-b from-customGradientEnd to-customGradientStart'>
+    <div className='flex w-3/5 m-auto  py-2 '>
+      <div className='   border-r-2 border-[#ff4655] w-1/2 bg-gradient-to-b from-customGradientEnd to-customGradientStart'>
         <div>
           <img src={Logo} alt='Logo Gamepad' className='w-4 mb-8 mt-2 ml-2' />
         </div>

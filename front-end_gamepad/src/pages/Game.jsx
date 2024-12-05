@@ -48,7 +48,7 @@ const Game = () => {
         <div className='w-1/2'>
           <img
             className='w-full h-auto rounded-lg shadow-md'
-            src={data.background_image}
+            src={data.background_image_additional}
             alt={data.name}
           />
         </div>
