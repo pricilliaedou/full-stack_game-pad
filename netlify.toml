@@ -1,4 +1,4 @@
 [build]
   base = "front-end_gamepad"
-  publish = "front-end_gamepad/dist"
+  publish = "dist"
   command = "yarn build"
