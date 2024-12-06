@@ -139,6 +139,7 @@ L'API sera accessible en local sur [http://localhost:3000](http://localhost:3000
 - Express.js
 - MongoDB via Mongoose
 - Crypto-js pour le chiffrement
+- Postman pour tester les routes
 
 ---
 
