@@ -39,7 +39,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/:id' element={<Game />} />
-
           <Route
             path='/login'
             element={

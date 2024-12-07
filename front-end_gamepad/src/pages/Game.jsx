@@ -44,23 +44,23 @@ const Game = () => {
   ) : (
     <div className='w-3/4 m-auto '>
       <h1>{data.name}</h1>
-      <div className='flex gap-3 w-full '>
-        <div className='w-1/2'>
+      <div className='flex flex-col md:flex-row gap-3 w-full '>
+        <div className='w-full md:w-1/2 flex '>
           <img
-            className='w-full h-auto rounded-lg shadow-md'
+            className='w-full h-full rounded-lg shadow-md object-cover'
             src={data.background_image_additional}
             alt={data.name}
           />
         </div>
-        <div className='w-1/2'>
+        <div className='w-full md:w-1/2 flex flex-col '>
           <div>
-            <div className='flex gap-3 '>
+            <div className='flex gap-3'>
               <button>
                 Saved to <span className='text-green-500'>Collection</span>
               </button>
               <button>Add a Review</button>
             </div>
-            <div className='flex gap-4 '>
+            <div className='flex gap-4 justify-between'>
               <div>
                 <p className='text-gray-400'>Plateforms</p>
                 {data.platforms.map((platform) => {
@@ -90,7 +90,8 @@ const Game = () => {
           </div>
         </div>
       </div>
-      <h2>Game like {`${data.name}`}</h2>
+      <h2 className='mt-6 text-lg'>Game like {`${data.name}`}</h2>
+      <p>En cours de réalisation...</p>
     </div>
   );
 };
